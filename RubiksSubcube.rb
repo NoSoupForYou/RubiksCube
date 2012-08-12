@@ -23,9 +23,16 @@ class RubiksPoint
         xmult = (axis != :x && !cw) ? -1 : 1
         ymult = (axis != :y && !cw) ? -1 : 1
         zmult = (axis != :z && !cw) ? -1 : 1
-        newX = RubiksMatrix.get(axis)[:x].x * xmult * @x + RubiksMatrix.get(axis)[:x].y * ymult * @y + RubiksMatrix.get(axis)[:x].z * zmult * @z
-        newY = RubiksMatrix.get(axis)[:y].x * xmult * @x + RubiksMatrix.get(axis)[:y].y * ymult * @y + RubiksMatrix.get(axis)[:y].z * zmult * @z
-        newZ = RubiksMatrix.get(axis)[:z].x * xmult * @x + RubiksMatrix.get(axis)[:z].y * ymult * @y + RubiksMatrix.get(axis)[:z].z * zmult * @z
+        newX =  RubiksMatrix.get(axis)[:x].x * xmult * @x +
+                RubiksMatrix.get(axis)[:x].y * ymult * @y +
+                RubiksMatrix.get(axis)[:x].z * zmult * @z
+        newY =  RubiksMatrix.get(axis)[:y].x * xmult * @x +
+                RubiksMatrix.get(axis)[:y].y * ymult * @y +
+                RubiksMatrix.get(axis)[:y].z * zmult * @z
+        newZ =  RubiksMatrix.get(axis)[:z].x * xmult * @x +
+                RubiksMatrix.get(axis)[:z].y * ymult * @y +
+                RubiksMatrix.get(axis)[:z].z * zmult * @z
+
         #puts "Rotating #{@x} #{@y} #{@z} to #{newX} #{newY} #{newZ}"
         @x = newX
         @y = newY
@@ -95,7 +102,9 @@ class RubiksColorSwap
                         RubiksColorSwap.new(5,3),
                         RubiksColorSwap.new(6,6)]
 
-    @@TRANSFORMS[:z] = [RubiksColorSwap.new(1,3), #UP rotates to be in the RIGHT position; new value for b is a
+    #UP rotates to be in the RIGHT position;
+    # new value for b is a
+    @@TRANSFORMS[:z] = [RubiksColorSwap.new(1,3),
                         RubiksColorSwap.new(2,2),
                         RubiksColorSwap.new(3,6),
                         RubiksColorSwap.new(4,1),
@@ -120,7 +129,8 @@ class RubiksColorSwap
 end
 
 class RubiksSubcube
-   # A subcube is one of the 9+8+9 pieces that makes up a rubiks cube
+    # A subcube is one of the 9+8+9 pieces that
+    # makes up a rubiks cube
     #
     
     # A subcube has an up, front, back, left, right, down 
@@ -172,7 +182,9 @@ class RubiksSubcube
     end
 
     def hasCoordinates(x, y, z)
-        return (@coord.x == x) && (@coord.y == y) && (@coord.z == z)
+        return (@coord.x == x &&
+                @coord.y == y &&
+                @coord.z == z)
     end
 
     def isCenterOfFace
@@ -198,7 +210,9 @@ class RubiksSubcube
     end
 
     def isEdge
-        return (!isCorner && !isCenterOfFace && !hasCoordinates(0,0,0))
+        return (!isCorner &&
+                !isCenterOfFace &&
+                !hasCoordinates(0,0,0))
     end
 
     def hasColor(color)
@@ -216,12 +230,18 @@ class RubiksSubcube
         @coord.rotate(axis, cw)
 
         # transform colors
-        up = RubiksColorSwap.rotatedValue(CubeSides::UP, @sides, axis, cw)
-        front = RubiksColorSwap.rotatedValue(CubeSides::FRONT, @sides, axis, cw)
-        right = RubiksColorSwap.rotatedValue(CubeSides::RIGHT, @sides, axis, cw)
-        left = RubiksColorSwap.rotatedValue(CubeSides::LEFT, @sides, axis, cw)
-        back = RubiksColorSwap.rotatedValue(CubeSides::BACK, @sides, axis, cw)
-        down = RubiksColorSwap.rotatedValue(CubeSides::DOWN, @sides, axis, cw)
+        up = RubiksColorSwap.rotatedValue(
+                CubeSides::UP, @sides, axis, cw)
+        front = RubiksColorSwap.rotatedValue(
+                CubeSides::FRONT, @sides, axis, cw)
+        right = RubiksColorSwap.rotatedValue(
+                CubeSides::RIGHT, @sides, axis, cw)
+        left = RubiksColorSwap.rotatedValue(
+                CubeSides::LEFT, @sides, axis, cw)
+        back = RubiksColorSwap.rotatedValue(
+                CubeSides::BACK, @sides, axis, cw)
+        down = RubiksColorSwap.rotatedValue(
+                CubeSides::DOWN, @sides, axis, cw)
         @sides[CubeSides::UP] = up
         @sides[CubeSides::FRONT] = front
         @sides[CubeSides::RIGHT] = right
@@ -235,7 +255,9 @@ class RubiksSubcube
         ret << "        B=#{@sides[CubeSides::BACK]}\n"
         ret << "       ____\n"
         ret << "      / #{@sides[CubeSides::UP]} /|\n"
-        ret << "L=#{@sides[CubeSides::LEFT]}  /___/#{@sides[CubeSides::RIGHT]}|  (#{@coord.x},#{@coord.y},#{@coord.z})\n"
+        ret << "L=#{@sides[CubeSides::LEFT]}  "
+        ret << "/___/#{@sides[CubeSides::RIGHT]}|  "
+        ret << "(#{@coord.x},#{@coord.y},#{@coord.z})\n"
         ret << "     | #{@sides[CubeSides::FRONT]} | /\n"
         ret << "     |___|/ \n"
         ret << "\n"

@@ -2,11 +2,12 @@
 
 # Copyright 2012 Danny Pollack
 
-require 'RubiksSubcube'
+require '.\RubiksSubcube'
 
 class RubiksCube
 
-    # A RubiksCube is made up of 9+8(+1 entirely hidden)+9 subcubes
+    # A RubiksCube is made up of 9+8(+1 entirely hidden)+9
+    # subcubes
     def initialize
         
         @subcubes = Array.new
@@ -33,78 +34,160 @@ class RubiksCube
         # ----------/
 
 
-        #let's create these subcubes with white on top, green facing us, red on the right
+        #let's create these subcubes with white on top, green 
+        # facing us, red on the right
         # Start with (x,y,z)=(-1,1,-1)
         # a
-        @subcubes << RubiksSubcube.new(-1, 1, -1,
-                                       RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::BLUE, RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
+        @subcubes << RubiksSubcube.new(
+                -1, 1, -1,
+                RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::BLUE,
+                RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
         # b
-        @subcubes << RubiksSubcube.new(0, 1, -1,
-                                       RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::BLUE, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
+        @subcubes << RubiksSubcube.new(
+                0, 1, -1,
+                RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::BLUE,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
         # c
-        @subcubes << RubiksSubcube.new(1, 1, -1,
-                                       RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::BLUE, RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN)
+        @subcubes << RubiksSubcube.new(
+                1, 1, -1,
+                RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::BLUE,
+                RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN
+        )
 
         # d
-        @subcubes << RubiksSubcube.new(-1, 1, 0, 
-                                       RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
+        @subcubes << RubiksSubcube.new(
+                -1, 1, 0, 
+                RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::HIDDEN,
+                RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
         # e
-        @subcubes << RubiksSubcube.new(0, 1, 0,
-                                       RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
+        @subcubes << RubiksSubcube.new(
+                0, 1, 0,
+                RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
         # f
-        @subcubes << RubiksSubcube.new(1, 1, 0,
-                                       RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN)
+        @subcubes << RubiksSubcube.new(
+                1, 1, 0,
+                RubiksColor::WHITE, RubiksColor::HIDDEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN
+        )
 
         # g
-        @subcubes << RubiksSubcube.new(-1, 1, 1, 
-                                       RubiksColor::WHITE, RubiksColor::GREEN, RubiksColor::HIDDEN, RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
+        @subcubes << RubiksSubcube.new(
+                -1, 1, 1, 
+                RubiksColor::WHITE, RubiksColor::GREEN, RubiksColor::HIDDEN,
+                RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
         # h
-        @subcubes << RubiksSubcube.new(0, 1, 1,
-                                       RubiksColor::WHITE, RubiksColor::GREEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
+        @subcubes << RubiksSubcube.new(
+                0, 1, 1,
+                RubiksColor::WHITE, RubiksColor::GREEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
         # i
-        @subcubes << RubiksSubcube.new(1, 1, 1,
-                                       RubiksColor::WHITE, RubiksColor::GREEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN)
+        @subcubes << RubiksSubcube.new(
+                1, 1, 1,
+                RubiksColor::WHITE, RubiksColor::GREEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN
+        )
 
     #(top, front, back, left, right, down)
         # Next slice down
-        @subcubes << RubiksSubcube.new(-1, 0, -1,
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE, RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
-        @subcubes << RubiksSubcube.new(0, 0, -1,
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
-        @subcubes << RubiksSubcube.new(1, 0, -1,
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE, RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN)
-        @subcubes << RubiksSubcube.new(-1, 0, 0, 
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
-        @subcubes << RubiksSubcube.new(0, 0, 0,
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
-        @subcubes << RubiksSubcube.new(1, 0, 0,
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN)
-        @subcubes << RubiksSubcube.new(-1, 0, 1, 
-                                       RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN, RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
-        @subcubes << RubiksSubcube.new(0, 0, 1,
-                                       RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN)
-        @subcubes << RubiksSubcube.new(1, 0, 1,
-                                       RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN)
+        @subcubes << RubiksSubcube.new(
+                -1, 0, -1,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE,
+                RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
+        @subcubes << RubiksSubcube.new(
+                0, 0, -1,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
+        @subcubes << RubiksSubcube.new(
+                1, 0, -1,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE,
+                RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN
+        )
+        @subcubes << RubiksSubcube.new(
+                -1, 0, 0, 
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN,
+                RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
+        @subcubes << RubiksSubcube.new(
+                0, 0, 0,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
+        @subcubes << RubiksSubcube.new(
+                1, 0, 0,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN
+        )
+        @subcubes << RubiksSubcube.new(
+                -1, 0, 1, 
+                RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN,
+                RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
+        @subcubes << RubiksSubcube.new(
+                0, 0, 1,
+                RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN
+        )
+        @subcubes << RubiksSubcube.new(
+                1, 0, 1,
+                RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::HIDDEN
+        )
 
         # Next slice down
-        @subcubes << RubiksSubcube.new(-1, -1, -1,
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE, RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::YELLOW)
-        @subcubes << RubiksSubcube.new(0, -1, -1,
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::YELLOW)
-        @subcubes << RubiksSubcube.new(1, -1, -1,
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE, RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::YELLOW)
-        @subcubes << RubiksSubcube.new(-1, -1, 0, 
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::YELLOW)
-        @subcubes << RubiksSubcube.new(0, -1, 0,
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::YELLOW)
-        @subcubes << RubiksSubcube.new(1, -1, 0,
-                                       RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::YELLOW)
-        @subcubes << RubiksSubcube.new(-1, -1, 1, 
-                                       RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN, RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::YELLOW)
-        @subcubes << RubiksSubcube.new(0, -1, 1,
-                                       RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::YELLOW)
-        @subcubes << RubiksSubcube.new(1, -1, 1,
-                                       RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::YELLOW)
+        @subcubes << RubiksSubcube.new(
+                -1, -1, -1,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE,
+                RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::YELLOW
+        )
+        @subcubes << RubiksSubcube.new(
+                0, -1, -1,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::YELLOW
+        )
+        @subcubes << RubiksSubcube.new(
+                1, -1, -1,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::BLUE,
+                RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::YELLOW
+        )
+        @subcubes << RubiksSubcube.new(
+                -1, -1, 0, 
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN,
+                RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::YELLOW
+        )
+        @subcubes << RubiksSubcube.new(
+                0, -1, 0,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::YELLOW
+        )
+        @subcubes << RubiksSubcube.new(
+                1, -1, 0,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::YELLOW
+        )
+        @subcubes << RubiksSubcube.new(
+                -1, -1, 1, 
+                RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN,
+                RubiksColor::ORANGE, RubiksColor::HIDDEN, RubiksColor::YELLOW
+        )
+        @subcubes << RubiksSubcube.new(
+                0, -1, 1,
+                RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::HIDDEN, RubiksColor::YELLOW
+        )
+        @subcubes << RubiksSubcube.new(
+                1, -1, 1,
+                RubiksColor::HIDDEN, RubiksColor::GREEN, RubiksColor::HIDDEN,
+                RubiksColor::HIDDEN, RubiksColor::RED, RubiksColor::YELLOW
+        )
     end
 
     def printCube 
@@ -207,13 +290,15 @@ class RubiksCube
         case symbol
         when "F"
             # The front face is where z=1
-            # This is rotating the cubes with z=1 by 90 degrees clockwise around the z axis
+            # This is rotating the cubes with z=1 by 90 degrees
+            # clockwise around the z axis
             testBlock = lambda { |subcube| subcube.z == 1 }
             cw = true
             axis = :z
         when "F'"
             # The front face is where z=1
-            # This is rotating the cubes with z=1 by 90 degrees ccw around the z axis
+            # This is rotating the cubes with z=1 by 90 degrees
+            # ccw around the z axis
             testBlock = lambda { |subcube| subcube.z == 1 }
             cw = false 
             axis = :z

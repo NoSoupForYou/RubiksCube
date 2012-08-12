@@ -1,5 +1,5 @@
 
-require 'RubiksCube'
+require '.\RubiksCube'
 
 class RubiksSimpleSolver
     def initialize(cube)

@@ -3,8 +3,8 @@
 
 # Copyright 2012 Danny Pollack
 
-require 'RubiksCube'
-require 'RubiksSimpleSolver'
+require '.\RubiksCube'
+require '.\RubiksSimpleSolver'
 
 # A couple of patterns from here: http://www.math.ucf.edu/~reid/Rubik/patterns.html
 def performCheckers(cube)
